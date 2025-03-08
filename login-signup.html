@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Support - Login/Signup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a5acd;
+            --secondary-color: #4b0082;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --white: #ffffff;
+            --light-gray: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.08);
+            width: 380px;
+            max-width: 95%;
+            padding: 40px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.6s ease-in-out;
+            background-color: var(--white);
+            padding: 0 50px;
+        }
+
+        .sign-in-container {
+            left: 0;
+            z-index: 2;
+        }
+
+        .sign-up-container {
+            left: 50%;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .container.right-panel-active .sign-in-container {
+            transform: translateX(100%);
+        }
+
+        .container.right-panel-active .sign-up-container {
+            transform: translateX(-100%);
+            opacity: 1;
+            z-index: 5;
+        }
+
+        .overlay-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.6s ease-in-out;
+            z-index: 100;
+        }
+
+        .container.right-panel-active .overlay-container {
+            transform: translateX(-100%);
+        }
+
+        .overlay {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 0 0;
+            color: var(--white);
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .container.right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        .overlay-panel {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            text-align: center;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+            color: var(--white);
+        }
+
+        .overlay-left {
+            transform: translateX(-20%);
+        }
+
+        .overlay-right {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .container.right-panel-active .overlay-left {
+            transform: translateX(0);
+        }
+
+        .container.right-panel-active .overlay-right {
+            transform: translateX(20%);
+        }
+
+        .overlay-panel h1 {
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        .overlay-panel p {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .overlay-panel .ghost {
+            background-color: transparent;
+            border: 1px solid var(--white);
+            color: var(--white);
+            padding: 10px 30px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-size: 12px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .overlay-panel .ghost:hover {
+            background-color: var(--white);
+            color: var(--primary-color);
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form h1 {
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            word-wrap: break-word;
+        }
+
+        input {
+            background-color: #eee;
+            border: none;
+            padding: 12px 15px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .form-extras {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin: 15px 0;
+            font-size: 12px;
+        }
+
+        .form-extras label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .form-extras input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+            min-width: 16px;
+            min-height: 16px;
+        }
+
+        .form-extras a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+            margin-left: 15px;
+        }
+
+        .form-extras a:hover {
+            color: var(--secondary-color);
+        }
+
+        button {
+            border-radius: 20px;
+            border: 1px solid var(--primary-color);
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-size: 13px;
+            font-weight: bold;
+            padding: 12px 40px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        button.ghost {
+            background-color: transparent;
+            border-color: var(--white);
+        }
+
+        .mobile-switch {
+            margin-top: 20px;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+            text-align: center;
+            width: 100%;
+        }
+
+        .mobile-switch a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+            font-size: 12px;
+        }
+
+        .mobile-form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--background-color);
+        }
+
+        .desktop-form-container {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--background-color);
+        }
+
+        .form-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media screen and (max-width: 768px) {
+            .mobile-form-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100vh;
+                padding: 0 20px;
+                box-sizing: border-box;
+            }
+
+            .mobile-form-container .container {
+                width: 100%;
+                max-width: 380px;
+                padding: 40px 30px;
+                margin: 0;
+                position: relative;
+            }
+
+            .form-container {
+                width: 100%;
+                position: static;
+                opacity: 1;
+                transform: none;
+                display: none;
+            }
+
+            .form-container.sign-in-container,
+            .form-container.sign-up-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+
+            .overlay-container {
+                display: none;
+            }
+
+            form h1 {
+                font-size: 1.7rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+
+            input {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (min-width: 769px) {
+            .mobile-form-container {
+                display: none;
+            }
+
+            .desktop-form-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100vh;
+                background-color: var(--background-color);
+            }
+
+            .desktop-form-container .container {
+                width: 380px;
+                max-width: 95%;
+                padding: 40px 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+
+            .desktop-form-container .form-container {
+                width: 100%;
+                position: static;
+                opacity: 1;
+                transform: none;
+                display: none;
+            }
+
+            .desktop-form-container .form-container.active {
+                display: flex;
+            }
+
+            form h1 {
+                font-size: 1.7rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+        }
+
+        /* Add password toggle styles */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--primary-color);
+            opacity: 0.7;
+            z-index: 10;
+        }
+
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+</head>
+<body>
+    <!-- Mobile Form Container -->
+    <div class="mobile-form-container">
+        <div class="container" id="container">
+            <div class="form-container sign-up-container">
+                <form action="#">
+                    <h1>Create Account</h1>
+                    <input type="text" placeholder="Name" required />
+                    <input type="text" placeholder="Username" required />
+                    <div class="password-container">
+                        <input type="password" placeholder="Password" required />
+                        <i class="fas fa-eye-slash password-toggle" id="signupTogglePassword"></i>
+                    </div>
+                    <div class="form-extras">
+                        <label>
+                            <input type="checkbox" /> I agree to the Terms of Service
+                        </label>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                    <p class="mobile-switch">
+                        Already have an account? <a href="#" id="signInMobile">Sign In</a>
+                    </p>
+                </form>
+            </div>
+            <div class="form-container sign-in-container">
+                <form id="loginForm">
+                    <h1>Sign in</h1>
+                    <input type="text" id="username" placeholder="Username" required />
+                    <div class="password-container">
+                        <input type="password" id="password" placeholder="Password" required />
+                        <i class="fas fa-eye-slash password-toggle" id="togglePassword"></i>
+                    </div>
+                    <div class="form-extras">
+                        <label>
+                            <input type="checkbox" /> Remember me
+                        </label>
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                    <button type="submit">Sign In</button>
+                    <p class="mobile-switch">
+                        Don't have an account? <a href="#" id="signUpMobile">Create Account</a>
+                    </p>
+                </form>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Welcome Back!</h1>
+                        <p>To keep connected with us, please login with your personal info</p>
+                        <button class="ghost" id="signIn">Sign In</button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>Hello, Friend!</h1>
+                        <p>Enter your personal details and start your journey with us</p>
+                        <button class="ghost" id="signUp">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Form Container -->
+    <div class="desktop-form-container">
+        <div class="container" id="desktopContainer">
+            <div class="form-container sign-in-container">
+                <form id="desktopLoginForm">
+                    <h1>Sign in</h1>
+                    <input type="text" id="desktopUsername" placeholder="Username" required />
+                    <div class="password-container">
+                        <input type="password" id="desktopPassword" placeholder="Password" required />
+                        <i class="fas fa-eye-slash password-toggle" id="desktopTogglePassword"></i>
+                    </div>
+                    <div class="form-extras">
+                        <label>
+                            <input type="checkbox" /> Remember me
+                        </label>
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                    <button type="submit">Sign In</button>
+                    <p class="mobile-switch">
+                        Don't have an account? <a href="#" id="desktopSignUpLink">Create Account</a>
+                    </p>
+                </form>
+            </div>
+            <div class="form-container sign-up-container">
+                <form id="desktopSignUpForm">
+                    <h1>Create Account</h1>
+                    <input type="text" placeholder="Name" required />
+                    <input type="text" placeholder="Username" required />
+                    <div class="password-container">
+                        <input type="password" placeholder="Password" required />
+                        <i class="fas fa-eye-slash password-toggle" id="signupTogglePassword"></i>
+                    </div>
+                    <div class="form-extras">
+                        <label>
+                            <input type="checkbox" /> I agree to the Terms of Service
+                        </label>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                    <p class="mobile-switch">
+                        Already have an account? <a href="#" id="desktopSignInLink">Sign In</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const container = document.getElementById('container');
+        const signUpMobileButton = document.getElementById('signUpMobile');
+        const signInMobileButton = document.getElementById('signInMobile');
+
+        // Desktop sliding panel
+        signUpButton.addEventListener('click', () => {
+            container.classList.add('right-panel-active');
+        });
+
+        signInButton.addEventListener('click', () => {
+            container.classList.remove('right-panel-active');
+        });
+
+        // Mobile view toggle
+        const mobileSignUpMobileButton = document.getElementById('signUpMobile');
+        const mobileSignInMobileButton = document.getElementById('signInMobile');
+        const mobileSignUpContainer = document.querySelector('.mobile-form-container .sign-up-container');
+        const mobileSignInContainer = document.querySelector('.mobile-form-container .sign-in-container');
+
+        mobileSignUpMobileButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            mobileSignInContainer.style.display = 'none';
+            mobileSignUpContainer.style.display = 'flex';
+        });
+
+        mobileSignInMobileButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            mobileSignUpContainer.style.display = 'none';
+            mobileSignInContainer.style.display = 'flex';
+        });
+
+        // Ensure login form is shown by default on mobile
+        window.addEventListener('load', () => {
+            mobileSignUpContainer.style.display = 'none';
+            mobileSignInContainer.style.display = 'flex';
+        });
+
+        // Login Form Submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const validCredentials = {
+                'user': 'user',     // Patient credentials
+                'doctor': 'doctor'  // Doctor/Therapist credentials
+            };
+
+            if (validCredentials[username] === password) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful!',
+                    text: `Welcome, ${username}!`,
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    // Store more detailed user information
+                    const userInfo = {
+                        username: username,
+                        userType: username === 'user' ? 'Patient' : 'Doctor',
+                        isLoggedIn: true,
+                        loginTimestamp: new Date().toISOString()
+                    };
+
+                    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                    
+                    // Redirect to index.html
+                    window.location.href = 'index.html';
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Credentials',
+                    text: 'Please try again.',
+                    confirmButtonColor: '#6a5acd'
+                });
+            }
+        });
+
+        // Swipe interactions for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        container.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        container.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // Minimum distance for a swipe
+            const swipeDifference = touchStartX - touchEndX;
+
+            if (Math.abs(swipeDifference) > swipeThreshold) {
+                if (swipeDifference > 0) {
+                    // Swipe Left - Show Signup
+                    container.classList.add('right-panel-active');
+                } else {
+                    // Swipe Right - Show Signin
+                    container.classList.remove('right-panel-active');
+                }
+            }
+        }
+
+        // Desktop Form Switching
+        const desktopSignUpLink = document.getElementById('desktopSignUpLink');
+        const desktopSignInLink = document.getElementById('desktopSignInLink');
+        const desktopContainer = document.getElementById('desktopContainer');
+        const desktopLoginFormContainer = document.querySelector('.desktop-form-container .sign-in-container');
+        const desktopSignUpFormContainer = document.querySelector('.desktop-form-container .sign-up-container');
+
+        desktopSignUpLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            desktopLoginFormContainer.classList.remove('active');
+            desktopSignUpFormContainer.classList.add('active');
+        });
+
+        desktopSignInLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            desktopSignUpFormContainer.classList.remove('active');
+            desktopLoginFormContainer.classList.add('active');
+        });
+
+        // Ensure login form is shown by default
+        window.addEventListener('load', () => {
+            desktopSignUpFormContainer.classList.remove('active');
+            desktopLoginFormContainer.classList.add('active');
+        });
+
+        // Desktop Login Form Submission
+        document.getElementById('desktopLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('desktopUsername').value;
+            const password = document.getElementById('desktopPassword').value;
+
+            const validCredentials = {
+                'user': 'user',     // Patient credentials
+                'doctor': 'doctor'  // Doctor/Therapist credentials
+            };
+
+            if (validCredentials[username] === password) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful!',
+                    text: `Welcome, ${username}!`,
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    // Store more detailed user information
+                    const userInfo = {
+                        username: username,
+                        userType: username === 'user' ? 'Patient' : 'Doctor',
+                        isLoggedIn: true,
+                        loginTimestamp: new Date().toISOString()
+                    };
+
+                    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                    
+                    // Redirect to index.html
+                    window.location.href = 'index.html';
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Credentials',
+                    text: 'Please try again.',
+                    confirmButtonColor: '#6a5acd'
+                });
+            }
+        });
+
+        // Password Visibility Toggle for Mobile Login
+        const mobilePasswordInput = document.querySelector('.mobile-form-container #password');
+        const mobileTogglePassword = document.getElementById('togglePassword');
+
+        mobileTogglePassword.addEventListener('click', function() {
+            const type = mobilePasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            mobilePasswordInput.setAttribute('type', type);
+            
+            // Toggle eye icon
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Password Visibility Toggle for Desktop Login
+        const desktopPasswordInput = document.querySelector('.desktop-form-container #desktopPassword');
+        const desktopTogglePassword = document.getElementById('desktopTogglePassword');
+
+        desktopTogglePassword.addEventListener('click', function() {
+            const type = desktopPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            desktopPasswordInput.setAttribute('type', type);
+            
+            // Toggle eye icon
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Password Visibility Toggle for Signup Form
+        const signupPasswordInput = document.querySelector('.password-container input[type="password"]');
+        const signupTogglePassword = document.getElementById('signupTogglePassword');
+
+        signupTogglePassword.addEventListener('click', function() {
+            const type = signupPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            signupPasswordInput.setAttribute('type', type);
+            
+            // Toggle eye icon
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+</body>
+</html>

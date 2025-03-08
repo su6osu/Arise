@@ -1,0 +1,273 @@
+:root {
+    --call-bg: #F0F4F8;
+    --call-primary: #6A5ACD;
+    --call-secondary: #9370DB;
+    --call-text: #333;
+    --call-light: #F5F5F5;
+    --call-red: #FF4B4B;
+}
+
+.call-page {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--call-bg);
+    color: var(--call-text);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.call-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Vertical Video Screen */
+.vertical-video-screen,
+.main-video-screen {
+    width: 100%;
+    height: 500px;
+    background-color: var(--call-light);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.participant-video,
+.main-participant-video {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-placeholder {
+    width: 200px;
+    height: 200px;
+    background-color: rgba(106, 90, 205, 0.1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-placeholder i {
+    font-size: 5rem;
+    color: var(--call-primary);
+}
+
+/* Emoji Slider */
+.emoji-slider {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.emoji-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    position: relative;
+    overflow: hidden;
+    height: 50px;
+}
+
+.emoji-option {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.emoji-option:hover {
+    transform: scale(1.2);
+}
+
+/* Flying Emoji Animation */
+@keyframes flyEmoji {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        opacity: 0.9;
+        transform: translate(0, -150px) scale(2.5);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(50px, -300px) scale(3.5);
+    }
+}
+
+.emoji-flying {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1000;
+    font-size: 2rem;
+    animation: flyEmoji 1s ease-out forwards;
+    text-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Vertical Controls */
+.vertical-controls {
+    width: 100%;
+}
+
+.control-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.control-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--call-light);
+    color: var(--call-primary);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background-color: var(--call-primary);
+    color: white;
+}
+
+.call-btn.red-glow {
+    background-color: var(--call-red);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 75, 75, 0.5);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(255, 75, 75, 0.5);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(255, 75, 75, 0.7);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(255, 75, 75, 0.5);
+    }
+}
+
+/* Participants Slider for Group Call */
+.participants-slider-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.participants-slider {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 10px 0;
+    scrollbar-width: none;
+}
+
+.participants-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.participant-card {
+    flex: 0 0 auto;
+    width: 150px;
+    text-align: center;
+    scroll-snap-align: start;
+}
+
+.participant-card .participant-video {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+.participant-card .video-placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+.slider-nav {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--call-primary);
+    cursor: pointer;
+    padding: 10px;
+}
+
+@media (max-width: 600px) {
+    .call-container {
+        max-width: 95%;
+        padding: 10px;
+    }
+
+    .vertical-video-screen,
+    .main-video-screen {
+        height: 300px;
+    }
+
+    .emoji-option {
+        font-size: 1.5rem;
+    }
+
+    .control-btn {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Prevent user selection and copying */
+.call-page,
+.call-container,
+.vertical-video-screen,
+.main-video-screen,
+.emoji-container,
+.emoji-option,
+.call-controls,
+.control-btn,
+.participants-slider-container,
+.participant-card {
+    -webkit-user-select: none;  /* Safari */
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+    touch-action: manipulation; /* Disable double-tap zoom and other touch interactions */
+    cursor: default;
+}
+
+/* Allow buttons to be interactive */
+.control-btn,
+.emoji-option,
+.slider-nav {
+    cursor: pointer;
+} 
