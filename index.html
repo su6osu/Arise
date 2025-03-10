@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arise - Mental Health Support</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="mainNavbar">
+        <div class="navbar-container">
+            <div class="navbar-logo" id="logoTop">Arise ●</div>
+
+            <!-- Navigation Links -->
+            <div class="navbar-links" id="navbarLinks">
+                <a href="#home"><i class="fas fa-home"></i> Home</a>
+                <a href="#about"><i class="fas fa-info-circle"></i> About Us</a>
+                <a href="#analytics"><i class="fas fa-chart-line"></i> Analytics</a>
+                <a href="#support"><i class="fas fa-hands-helping"></i> Support Services</a>
+                <a href="#community-connect"><i class="fas fa-users"></i> Community</a>
+                <a href="#developers"><i class="fas fa-code"></i> Developers</a>
+            </div>
+
+            <div class="navbar-actions">
+                <a href="./login-signup.html" class="login-signup-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login / Sign Up
+                </a>
+            </div>
+        </div>
+        <!-- Hamburger Menu for Mobile -->
+        <div class="hamburger-menu" id="hamburgerMenu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+
+
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="mobile-menu-content">
+            <a href="#home">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+            <a href="#about">
+                <i class="fas fa-info-circle"></i>
+                About Us
+            </a>
+            <a href="#analytics">
+                <i class="fas fa-chart-line"></i>
+                Analytics
+            </a>
+            <a href="#support">
+                <i class="fas fa-hands-helping"></i>
+                Support Services
+            </a>
+            <a href="#community-connect">
+                <i class="fas fa-users"></i>
+                Community
+            </a>
+            <a href="#developers">
+                <i class="fas fa-code"></i>
+                Developers
+            </a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <main id="home" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>You Are Not Alone</h1>
+                    <p>Breaking the Silence, Healing Together: Your Mental Health Matters</p>
+                    <button class="cta-button">Get Support Now</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- About Us Section -->
+    <section id="about" class="section about-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>About Arise</h2>
+                <p>Understanding our mission and commitment to mental health support</p>
+            </div>
+            <div class="section-content">
+                <p>Arise is more than just a platform; it's a compassionate community dedicated to breaking the stigma
+                    surrounding mental health. We provide a safe, supportive environment where individuals can find
+                    understanding, resources, and hope.</p>
+                <div class="about-details">
+                    <div class="about-card">
+                        <i class="fas fa-heart"></i>
+                        <h3>Empathy-Driven</h3>
+                        <p>Our approach is rooted in genuine care and understanding.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Confidential</h3>
+                        <p>Your privacy and safety are our top priorities.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-globe"></i>
+                        <h3>Accessible</h3>
+                        <p>Support available anytime, anywhere.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Section -->
+    <section id="analytics" class="section analytics-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Mental Health Insights</h2>
+                <p>Data-driven understanding of mental health trends and support impact</p>
+            </div>
+            <div class="section-content">
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>User Engagement</h3>
+                        <div class="chart-placeholder">
+                            <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['Jan','Feb','Mar','Apr','May'],datasets:[{label:'Users',data:[5000,5500,6000,6500,7000]}]}}"
+                                alt="User Engagement Chart" class="analytics-chart">
+                            <p>Total Users Supported: 5,000+</p>
+                        </div>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Support Sessions</h3>
+                        <div class="chart-placeholder">
+                            <img src="https://quickchart.io/chart?c={type:'line',data:{labels:['Q1','Q2','Q3','Q4'],datasets:[{label:'Counseling Hours',data:[2500,3000,3500,4000],borderColor:'rgba(75, 192, 192, 1)'}]}}"
+                                alt="Support Sessions Chart" class="analytics-chart">
+                            <p>Counseling Hours: 10,000+</p>
+                        </div>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Community Impact</h3>
+                        <div class="chart-placeholder">
+                            <img src="https://quickchart.io/chart?c={type:'pie',data:{labels:['Positive','Neutral','Negative'],datasets:[{data:[95,4,1]}]}}"
+                                alt="Community Impact Chart" class="analytics-chart">
+                            <p>Positive Feedback: 95%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="section support-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Our Support Services</h2>
+            </div>
+            <div class="section-content">
+                <div class="support-cards">
+                    <div class="support-card">
+                        <i class="fas fa-comments"></i>
+                        <h3>Community Support</h3>
+                        <p>Connect with others who understand your journey</p>
+                    </div>
+                    <div class="support-card">
+                        <i class="fas fa-user-md"></i>
+                        <h3>Professional Counseling</h3>
+                        <p>One-on-one sessions with licensed therapists</p>
+                    </div>
+                    <div class="support-card">
+                        <i class="fas fa-book-open"></i>
+                        <h3>Resources</h3>
+                        <p>Educational materials and coping strategies</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Connection Section -->
+    <section id="community-connect" class="community-connection">
+        <div class="community-connection-container">
+            <div class="community-connection-header">
+                <h2>Community Support</h2>
+                <p>Connect, share, and heal together through compassionate peer support and themed group circles</p>
+            </div>
+            <div class="community-support-grid">
+                <div class="community-support-card">
+                    <i class="community-support-card-icon fas fa-phone-alt"></i>
+                    <h3>Peer Support Call</h3>
+                    <p>Confidential, compassionate one-on-one support calls with understanding peers</p>
+                    <a href="call-pages/one-on-one-call.html" class="start-call-btn one-on-one-call-btn">
+                        <i class="fas fa-phone-alt"></i> Start Supportive Call
+                    </a>
+                </div>
+                <div class="community-support-card">
+                    <i class="community-support-card-icon fas fa-users"></i>
+                    <h3>Group Support Circles</h3>
+                    <p>Join themed support groups and share experiences</p>
+                    <a href="call-pages/group-call.html" class="start-call-btn group-call-btn">
+                        <i class="fas fa-video"></i> Join Group Call
+                    </a>
+                </div>
+                <div class="community-support-card">
+                    <i class="community-support-card-icon fas fa-heart"></i>
+                    <h3>Available Support Groups</h3>
+                    <div class="support-group-details">
+                        <div class="support-group-members">
+                            <i class="fas fa-users"></i>
+                            <span>Anxiety Warriors</span>
+                        </div>
+                        <div class="support-group-members">
+                            <span>42 Members</span>
+                        </div>
+                    </div>
+                    <div class="support-group-details">
+                        <div class="support-group-members">
+                            <i class="fas fa-brain"></i>
+                            <span>Depression Recovery</span>
+                        </div>
+                        <div class="support-group-members">
+                            <span>67 Members</span>
+                        </div>
+                    </div>
+                    <div class="support-group-details">
+                        <div class="support-group-members">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <span>Self-Care Sanctuary</span>
+                        </div>
+                        <div class="support-group-members">
+                            <span>55 Members</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developers Section -->
+    <section id="developers" class="developers-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>OUR DEVELOPERS</h2>
+                <p>Meet the passionate team behind Arise</p>
+            </div>
+            <div class="developers-grid">
+                <div class="developer-card">
+                    <div class="developer-image">
+                        <img src="./assets/developers/Deepanshu.jpg" alt="Deepanshu Chauhan">
+                    </div>
+                    <h3>DEEPANSHU CHAUHAN</h3>
+                    <p>Developer/Designer</p>
+                    <div class="developer-social-icons">
+                        <a href="https://www.linkedin.com/in/su6o" class="social-icon linkedin"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/su6osu" class="social-icon github"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="developer-card">
+                    <div class="developer-image">
+                        <img src="./assets/developers/Priya.jpeg" alt="Priya Sharma">
+                    </div>
+                    <h3>PRIYA SHARMA</h3>
+                    <p>Developer</p>
+                    <div class="developer-social-icons">
+                        <a href="https://www.linkedin.com/in/priya-sharma-a65902253" class="social-icon linkedin"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/pri12ya871" class="social-icon github"><i
+                                class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="developer-card">
+                    <div class="developer-image">
+                        <img src="./assets/developers/Gagandeep.jpeg" alt="Gagandeep Singh">
+                    </div>
+                    <h3>GAGANDEEP SINGH</h3>
+                    <p>Developer</p>
+                    <div class="developer-social-icons">
+                        <a href="https://www.linkedin.com/in/gagan-deep-singh-854a14281?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                            class="social-icon linkedin"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon github"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="developer-card">
+                    <div class="developer-image">
+                        <img src="./assets/developers/Yugank.jpeg" alt="Yugank Prajapati">
+                    </div>
+                    <h3>YUGANK PRAJAPATI</h3>
+                    <p>Developer</p>
+                    <div class="developer-social-icons">
+                        <a href="https://www.linkedin.com/in/yugankprajapati?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                            class="social-icon linkedin"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon github"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="developer-card">
+                    <div class="developer-image">
+                        <img src="./assets/developers/Rishu.jpeg" alt="Rishu Prashad">
+                    </div>
+                    <h3>RISHU PRASHAD</h3>
+                    <p>Developer</p>
+                    <div class="developer-social-icons">
+                        <a href="https://www.linkedin.com/in/01rishu10?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                            class="social-icon linkedin"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon github"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section footer-brand">
+                <div class="footer-logo">
+                    <h3>Arise.</h3>
+                    <p>Empowering mental health support through compassionate technology and human connection, creating
+                        a safe and understanding environment for mental wellness.</p>
+                </div>
+            </div>
+
+            <div class="footer-section footer-newsletter">
+                <h4>Stay Connected</h4>
+                <form id="newsletterForm">
+                    <div class="newsletter-input-group">
+                        <input type="email" placeholder="Enter your email"
+                            pattern="[a-zA-Z0-9._%+-]+@(gmail\.com|outlook\.com|hotmail\.com)" required>
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <p class="newsletter-disclaimer">Only Gmail, Outlook, and Hotmail domains are accepted.</p>
+                </form>
+            </div>
+
+            <div class="footer-section footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2025 Arise Mental Health Support. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu Toggle
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+            // Toggle mobile menu
+            hamburgerMenu.addEventListener('click', function () {
+                this.classList.toggle('active');
+                mobileMenuOverlay.classList.toggle('active');
+            });
+
+            // Close mobile menu
+            mobileMenuClose.addEventListener('click', function () {
+                hamburgerMenu.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+            });
+
+            // Close mobile menu when a link is clicked
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-content a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    hamburgerMenu.classList.remove('active');
+                    mobileMenuOverlay.classList.remove('active');
+                });
+            });
+
+            // Smooth scrolling for mobile menu links
+            mobileMenuLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = targetId === 'logoTop'
+                        ? document.documentElement
+                        : document.getElementById(targetId);
+
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Smooth scrolling for all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Check if it's the logo or a section link
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = targetId === 'logoTop'
+                        ? document.documentElement
+                        : document.getElementById(targetId);
+
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Login/Signup Button and User Authentication Logic
+            const loginSignupBtn = document.querySelector('.login-signup-btn');
+            const navbarActions = document.querySelector('.navbar-actions');
+
+            // Check user authentication state
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+            if (userInfo && userInfo.isLoggedIn) {
+                // Hide login button
+                loginSignupBtn.style.display = 'none';
+
+                // Create user profile element
+                const userProfileElement = document.createElement('div');
+                userProfileElement.classList.add('user-profile');
+
+                // Define icons based on user type
+                const userIcons = {
+                    'Patient': 'fa-user',   // User icon for patients
+                    'Doctor': 'fa-user-md'  // Doctor icon for therapists
+                };
+
+                userProfileElement.innerHTML = `
+                    <div class="user-avatar">
+                        <i class="fas ${userIcons[userInfo.userType]} user-profile-icon"></i>
+                    </div>
+                    <button id="logoutBtn" class="logout-btn">Logout</button>
+                `;
+
+                // Append user profile to navbar actions
+                navbarActions.appendChild(userProfileElement);
+
+                // Add logout functionality
+                const logoutBtn = document.getElementById('logoutBtn');
+                logoutBtn.addEventListener('click', function () {
+                    // Clear user info from localStorage
+                    localStorage.removeItem('userInfo');
+
+                    // Reload page to reset navbar
+                    window.location.reload();
+                });
+
+                // Add CSS for the profile icon
+                const styleTag = document.createElement('style');
+                styleTag.textContent = `
+                    .user-profile-icon {
+                        font-size: 24px;
+                        color: var(--primary-color);
+                        background-color: rgba(106, 90, 205, 0.1);
+                        padding: 10px;
+                        border-radius: 50%;
+                    }
+                `;
+                document.head.appendChild(styleTag);
+            }
+        });
+    </script>
+
+    <div class="chatbot">
+        <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+        <script src="https://files.bpcontent.cloud/2025/03/10/06/20250310061217-8A23KO0L.js"></script>
+    </div>
+
+</body>
+
+</html>
