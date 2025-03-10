@@ -387,6 +387,7 @@ body {
 }
 
 .navbar-logo {
+    font-family: "Cinzel", serif;
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--primary-color);
